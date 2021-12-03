@@ -281,6 +281,8 @@ else
   hi DiagnosticSignError ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
   hi DiagnosticFloatingHint ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
   hi icebergALAccentRed ctermfg=203 guifg=#e27878
+  hi FloatBorder ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
+  hi NormalFloat ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
 
   if has('nvim')
     let g:terminal_color_0 = '#1e2132'
