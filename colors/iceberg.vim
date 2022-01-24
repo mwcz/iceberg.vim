@@ -326,7 +326,7 @@ hi! link rubyFunction Title
 hi! link rubyInterpolationDelimiter String
 hi! link rubySharpBang Comment
 hi! link rubyStringDelimiter String
-hi! link rustFuncCall Normal
+hi! link rustFuncCall Delimiter " this would be Normal, but Normal has a bg and this sometimes appears within a floating pane which has a different bg color
 hi! link rustFuncName Title
 hi! link rustType Constant
 hi! link sassClass Special
@@ -394,6 +394,7 @@ hi! link markdownCode String
 hi! link markdownCodeDelimiter String
 hi! link markdownHeadingDelimiter Comment
 hi! link markdownRule Comment
+hi! link mkdLt Statement
 hi! link ngxDirective Statement
 hi! link plug1 Normal
 hi! link plug2 Identifier
