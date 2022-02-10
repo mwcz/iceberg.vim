@@ -216,8 +216,8 @@ function! s:create_colors(palette) abort
         \ }))
   call extend(rules, pgmnt#hi#group(
         \ 'PreProc', {
-        \   'ctermfg': c.green,
-        \   'guifg': g.green,
+        \   'ctermfg': c.orange,
+        \   'guifg': g.orange,
         \ }))
   call extend(rules, pgmnt#hi#group(
         \ 'Question', {
@@ -590,6 +590,26 @@ function! s:create_colors(palette) abort
           \   'guifg': eval('g.'..value),
           \ }))
   endfor
+
+  " Try to fix floating border colors.
+  call extend(rules, pgmnt#hi#group(
+        \ 'FloatBorder', {
+        \   'ctermbg': c.pmenu_bg,
+        \   'ctermfg': c.pmenu_fg,
+        \   'guibg': g.pmenu_bg,
+        \   'guifg': g.pmenu_fg,
+        \ }))
+
+  " Info color is hard to read within floating window, so use normal text
+  " color instead.
+  call extend(rules, pgmnt#hi#group(
+        \ 'NormalFloat', {
+        \   'ctermbg': c.pmenu_bg,
+        \   'ctermfg': c.pmenu_fg,
+        \   'guibg': g.pmenu_bg,
+        \   'guifg': g.pmenu_fg,
+        \ }))
+
   " Info color is hard to read within floating window, so use normal text
   " color instead.
   call extend(rules, pgmnt#hi#group(

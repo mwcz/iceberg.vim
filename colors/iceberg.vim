@@ -5,7 +5,7 @@
 "
 " File:       iceberg.vim
 " Maintainer: cocopon <cocopon@me.com>
-" Modified:   2021-11-11 12:01-0500
+" Modified:   2022-02-10 10:10-0500
 " License:    MIT
 
 
@@ -58,7 +58,7 @@ if &background == 'light'
   hi PmenuSbar ctermbg=251 ctermfg=NONE guibg=#cad0de guifg=NONE
   hi PmenuSel ctermbg=248 ctermfg=235 guibg=#a7b2cd guifg=#33374c
   hi PmenuThumb ctermbg=237 ctermfg=NONE guibg=#33374c guifg=NONE
-  hi PreProc ctermfg=64 guifg=#668e3d
+  hi PreProc ctermfg=130 guifg=#c57339
   hi Question ctermfg=64 guifg=#668e3d
   hi QuickFixLine ctermbg=251 ctermfg=237 guibg=#c9cdd7 guifg=#33374c
   hi Search ctermbg=180 ctermfg=94 guibg=#eac6ad guifg=#85512c
@@ -125,17 +125,15 @@ if &background == 'light'
   hi LspDiagnosticsUnderlineError cterm=underline ctermfg=125 gui=underline guisp=#cc517a term=underline
   hi LspDiagnosticsDefaultError ctermfg=125 guifg=#cc517a
   hi LspDiagnosticsSignError ctermbg=253 ctermfg=125 guibg=#dcdfe7 guifg=#cc517a
+  hi FloatBorder ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
+  hi NormalFloat ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
   hi LspDiagnosticsFloatingHint ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
-  hi DiagnosticUnderlineInfo cterm=underline ctermfg=25 gui=underline guisp=#2d539e term=underline
   hi DiagnosticInfo ctermfg=25 guifg=#2d539e
   hi DiagnosticSignInfo ctermbg=253 ctermfg=25 guibg=#dcdfe7 guifg=#2d539e
-  hi DiagnosticUnderlineHint cterm=underline ctermfg=248 gui=underline guisp=#9fa7bd term=underline
   hi DiagnosticHint ctermfg=248 guifg=#9fa7bd
   hi DiagnosticSignHint ctermbg=253 ctermfg=248 guibg=#dcdfe7 guifg=#9fa7bd
-  hi DiagnosticUnderlineWarn cterm=underline ctermfg=130 gui=underline guisp=#c57339 term=underline
   hi DiagnosticWarn ctermfg=130 guifg=#c57339
   hi DiagnosticSignWarn ctermbg=253 ctermfg=130 guibg=#dcdfe7 guifg=#c57339
-  hi DiagnosticUnderlineError cterm=underline ctermfg=125 gui=underline guisp=#cc517a term=underline
   hi DiagnosticError ctermfg=125 guifg=#cc517a
   hi DiagnosticSignError ctermbg=253 ctermfg=125 guibg=#dcdfe7 guifg=#cc517a
   hi DiagnosticFloatingHint ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
@@ -199,7 +197,7 @@ else
   hi PmenuSbar ctermbg=236 ctermfg=NONE guibg=#3d425b guifg=NONE
   hi PmenuSel ctermbg=240 ctermfg=255 guibg=#5b6389 guifg=#eff0f4
   hi PmenuThumb ctermbg=251 ctermfg=NONE guibg=#c6c8d1 guifg=NONE
-  hi PreProc ctermfg=150 guifg=#b4be82
+  hi PreProc ctermfg=216 guifg=#e2a478
   hi Question ctermfg=150 guifg=#b4be82
   hi QuickFixLine ctermbg=236 ctermfg=252 guibg=#272c42 guifg=#c6c8d1
   hi Search ctermbg=216 ctermfg=234 guibg=#e4aa80 guifg=#392313
@@ -227,8 +225,8 @@ else
   hi Type ctermfg=110 gui=NONE guifg=#84a0c6
   hi Underlined cterm=underline ctermfg=110 gui=underline guifg=#84a0c6 term=underline
   hi VertSplit cterm=NONE ctermbg=233 ctermfg=233 gui=NONE guibg=#0f1117 guifg=#0f1117
-  hi Visual ctermbg=236 ctermfg=NONE guibg=#3d425b guifg=NONE
-  hi VisualNOS ctermbg=236 ctermfg=NONE guibg=#3d425b guifg=NONE
+  hi Visual ctermbg=236 ctermfg=NONE guibg=#272c42 guifg=NONE
+  hi VisualNOS ctermbg=236 ctermfg=NONE guibg=#272c42 guifg=NONE
   hi WildMenu ctermbg=255 ctermfg=234 guibg=#d4d5db guifg=#17171b
   hi diffAdded ctermfg=150 guifg=#b4be82
   hi diffRemoved ctermfg=203 guifg=#e27878
@@ -266,23 +264,19 @@ else
   hi LspDiagnosticsUnderlineError cterm=underline ctermfg=203 gui=underline guisp=#e27878 term=underline
   hi LspDiagnosticsDefaultError ctermfg=203 guifg=#e27878
   hi LspDiagnosticsSignError ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
+  hi FloatBorder ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
+  hi NormalFloat ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
   hi LspDiagnosticsFloatingHint ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
-  hi DiagnosticUnderlineInfo cterm=underline ctermfg=110 gui=underline guisp=#84a0c6 term=underline
   hi DiagnosticInfo ctermfg=110 guifg=#84a0c6
   hi DiagnosticSignInfo ctermbg=235 ctermfg=110 guibg=#1e2132 guifg=#84a0c6
-  hi DiagnosticUnderlineHint cterm=underline ctermfg=239 gui=underline guisp=#444b71 term=underline
   hi DiagnosticHint ctermfg=239 guifg=#444b71
   hi DiagnosticSignHint ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
-  hi DiagnosticUnderlineWarn cterm=underline ctermfg=216 gui=underline guisp=#e2a478 term=underline
   hi DiagnosticWarn ctermfg=216 guifg=#e2a478
   hi DiagnosticSignWarn ctermbg=235 ctermfg=216 guibg=#1e2132 guifg=#e2a478
-  hi DiagnosticUnderlineError cterm=underline ctermfg=203 gui=underline guisp=#e27878 term=underline
   hi DiagnosticError ctermfg=203 guifg=#e27878
   hi DiagnosticSignError ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
   hi DiagnosticFloatingHint ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
   hi icebergALAccentRed ctermfg=203 guifg=#e27878
-  hi FloatBorder ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
-  hi NormalFloat ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
 
   if has('nvim')
     let g:terminal_color_0 = '#1e2132'
@@ -326,7 +320,7 @@ hi! link rubyFunction Title
 hi! link rubyInterpolationDelimiter String
 hi! link rubySharpBang Comment
 hi! link rubyStringDelimiter String
-hi! link rustFuncCall Delimiter " this would be Normal, but Normal has a bg and this sometimes appears within a floating pane which has a different bg color
+hi! link rustFuncCall Normal
 hi! link rustFuncName Title
 hi! link rustType Constant
 hi! link sassClass Special
@@ -394,7 +388,6 @@ hi! link markdownCode String
 hi! link markdownCodeDelimiter String
 hi! link markdownHeadingDelimiter Comment
 hi! link markdownRule Comment
-hi! link mkdLt Statement
 hi! link ngxDirective Statement
 hi! link plug1 Normal
 hi! link plug2 Identifier
