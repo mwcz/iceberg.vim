@@ -5,7 +5,7 @@
 "
 " File:       iceberg.vim
 " Maintainer: cocopon <cocopon@me.com>
-" Modified:   2022-02-10 10:10-0500
+" Modified:   2022-02-13 20:51-0500
 " License:    MIT
 
 
@@ -128,12 +128,16 @@ if &background == 'light'
   hi FloatBorder ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
   hi NormalFloat ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
   hi LspDiagnosticsFloatingHint ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
+  hi DiagnosticUnderlineInfo cterm=underline ctermfg=25 gui=underline guisp=#2d539e term=underline
   hi DiagnosticInfo ctermfg=25 guifg=#2d539e
   hi DiagnosticSignInfo ctermbg=253 ctermfg=25 guibg=#dcdfe7 guifg=#2d539e
+  hi DiagnosticUnderlineHint cterm=underline ctermfg=248 gui=underline guisp=#9fa7bd term=underline
   hi DiagnosticHint ctermfg=248 guifg=#9fa7bd
   hi DiagnosticSignHint ctermbg=253 ctermfg=248 guibg=#dcdfe7 guifg=#9fa7bd
+  hi DiagnosticUnderlineWarn cterm=underline ctermfg=130 gui=underline guisp=#c57339 term=underline
   hi DiagnosticWarn ctermfg=130 guifg=#c57339
   hi DiagnosticSignWarn ctermbg=253 ctermfg=130 guibg=#dcdfe7 guifg=#c57339
+  hi DiagnosticUnderlineError cterm=underline ctermfg=125 gui=underline guisp=#cc517a term=underline
   hi DiagnosticError ctermfg=125 guifg=#cc517a
   hi DiagnosticSignError ctermbg=253 ctermfg=125 guibg=#dcdfe7 guifg=#cc517a
   hi DiagnosticFloatingHint ctermbg=251 ctermfg=237 guibg=#cad0de guifg=#33374c
@@ -267,12 +271,16 @@ else
   hi FloatBorder ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
   hi NormalFloat ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
   hi LspDiagnosticsFloatingHint ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
+  hi DiagnosticUnderlineInfo cterm=underline ctermfg=110 gui=underline guisp=#84a0c6 term=underline
   hi DiagnosticInfo ctermfg=110 guifg=#84a0c6
   hi DiagnosticSignInfo ctermbg=235 ctermfg=110 guibg=#1e2132 guifg=#84a0c6
+  hi DiagnosticUnderlineHint cterm=underline ctermfg=239 gui=underline guisp=#444b71 term=underline
   hi DiagnosticHint ctermfg=239 guifg=#444b71
   hi DiagnosticSignHint ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
+  hi DiagnosticUnderlineWarn cterm=underline ctermfg=216 gui=underline guisp=#e2a478 term=underline
   hi DiagnosticWarn ctermfg=216 guifg=#e2a478
   hi DiagnosticSignWarn ctermbg=235 ctermfg=216 guibg=#1e2132 guifg=#e2a478
+  hi DiagnosticUnderlineError cterm=underline ctermfg=203 gui=underline guisp=#e27878 term=underline
   hi DiagnosticError ctermfg=203 guifg=#e27878
   hi DiagnosticSignError ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
   hi DiagnosticFloatingHint ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
@@ -320,7 +328,6 @@ hi! link rubyFunction Title
 hi! link rubyInterpolationDelimiter String
 hi! link rubySharpBang Comment
 hi! link rubyStringDelimiter String
-hi! link rustFuncCall Normal
 hi! link rustFuncName Title
 hi! link rustType Constant
 hi! link sassClass Special

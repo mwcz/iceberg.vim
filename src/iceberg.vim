@@ -722,7 +722,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('rubyStringDelimiter', 'String'))
 
   " rust
-  call add(links, pgmnt#hi#link('rustFuncCall', 'Normal'))
+  " call add(links, pgmnt#hi#link('rustFuncCall', 'Normal'))
   call add(links, pgmnt#hi#link('rustFuncName', 'Title'))
   call add(links, pgmnt#hi#link('rustType', 'Constant'))
 
