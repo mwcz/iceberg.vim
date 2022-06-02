@@ -619,14 +619,14 @@ function! s:create_colors(palette) abort
 "         \ }))
 " endfor
 
-" " Try to fix floating border colors.
-" call extend(rules, pgmnt#hi#group(
-"       \ 'FloatBorder', {
-"       \   'ctermbg': c.pmenu_bg,
-"       \   'ctermfg': c.pmenu_fg,
-"       \   'guibg': g.pmenu_bg,
-"       \   'guifg': g.pmenu_fg,
-"       \ }))
+" Try to fix floating border colors.
+call extend(rules, pgmnt#hi#group(
+      \ 'FloatBorder', {
+      \   'ctermbg': c.pmenu_bg,
+      \   'ctermfg': c.pmenu_fg,
+      \   'guibg': g.pmenu_bg,
+      \   'guifg': g.pmenu_fg,
+      \ }))
 
 " " Info color is hard to read within floating window, so use normal text
 " " color instead.
