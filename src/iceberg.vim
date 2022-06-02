@@ -420,6 +420,14 @@ function! s:create_colors(palette) abort
         \ }))
   " }}}
 
+  " Custom rules {{{
+  call extend(rules, pgmnt#hi#group(
+        \ 'icebergNormalFg', {
+        \   'ctermfg': c.normal_fg,
+        \   'guifg': g.normal_fg,
+        \ }))
+  " }}}
+
   " Rules for filetypes {{{
   " diff
   call extend(rules, pgmnt#hi#group(
@@ -558,6 +566,26 @@ function! s:create_colors(palette) abort
         \   'guifg': g.orange,
         \ }))
 
+  " [Tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter)
+  call extend(rules, pgmnt#hi#group(
+        \ ['TSFunction', 'TSFunctionBuiltin', 'TSFunctionMacro'], {
+        \   'ctermfg': c.pale,
+        \   'guifg': g.pale,
+        \ }))
+  call extend(rules, pgmnt#hi#group(
+        \ ['TSMethod'], {
+        \   'ctermfg': c.pale,
+        \   'guifg': g.pale,
+        \ }))
+  call extend(rules, pgmnt#hi#group(
+        \ ['TSURI'], {
+        \   'cterm': 'underline',
+        \   'ctermfg': c.lblue,
+        \   'gui': 'underline',
+        \   'guifg': g.lblue,
+        \   'term': 'underline',
+        \ }))
+
   " [zenspace.vim](https://github.com/thinca/vim-zenspace)
   call extend(rules, pgmnt#hi#group(
         \ 'ZenSpace', {
@@ -566,82 +594,109 @@ function! s:create_colors(palette) abort
         \ }))
   " }}}
 
-  " [Neovim built-in LSP](https://neovim.io/doc/user/lsp.html)
-  " It is deprecated in favor of 'Diagnostic*' below.
-  for [key, value] in items({'Error': 'red', 'Warning': 'orange', 'Information': 'blue', 'Hint': 'linenr_fg'})
+" " [Neovim built-in LSP](https://neovim.io/doc/user/lsp.html)
+" " It is deprecated in favor of 'Diagnostic*' below.
+" for [key, value] in items({'Error': 'red', 'Warning': 'orange', 'Information': 'blue', 'Hint': 'linenr_fg'})
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'LspDiagnosticsUnderline'..key, {
+"         \   'cterm': 'underline',
+"         \   'gui': 'underline',
+"         \   'term': 'underline',
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guisp': eval('g.'..value),
+"         \ }))
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'LspDiagnosticsDefault'..key, {
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guifg': eval('g.'..value),
+"         \ }))
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'LspDiagnosticsSign'..key, {
+"         \   'ctermbg': c.linenr_bg,
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guibg': g.linenr_bg,
+"         \   'guifg': eval('g.'..value),
+"         \ }))
+" endfor
+
+" " Try to fix floating border colors.
+" call extend(rules, pgmnt#hi#group(
+"       \ 'FloatBorder', {
+"       \   'ctermbg': c.pmenu_bg,
+"       \   'ctermfg': c.pmenu_fg,
+"       \   'guibg': g.pmenu_bg,
+"       \   'guifg': g.pmenu_fg,
+"       \ }))
+
+" " Info color is hard to read within floating window, so use normal text
+" " color instead.
+" call extend(rules, pgmnt#hi#group(
+"       \ 'NormalFloat', {
+"       \   'ctermbg': c.pmenu_bg,
+"       \   'ctermfg': c.pmenu_fg,
+"       \   'guibg': g.pmenu_bg,
+"       \   'guifg': g.pmenu_fg,
+"       \ }))
+
+" " Info color is hard to read within floating window, so use normal text
+" " color instead.
+" call extend(rules, pgmnt#hi#group(
+"       \ 'LspDiagnosticsFloatingHint', {
+"       \   'ctermbg': c.pmenu_bg,
+"       \   'ctermfg': c.pmenu_fg,
+"       \   'guibg': g.pmenu_bg,
+"       \   'guifg': g.pmenu_fg,
+"       \ }))
+" " }}}
+
+" " [Neovim built-in diagnostics](https://neovim.io/doc/user/diagnostic.html)
+" for [key, value] in items({'Error': 'red', 'Warn': 'orange', 'Info': 'blue', 'Hint': 'linenr_fg'})
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'DiagnosticUnderline'..key, {
+"         \   'cterm': 'underline',
+"         \   'gui': 'underline',
+"         \   'term': 'underline',
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guisp': eval('g.'..value),
+"         \ }))
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'Diagnostic'..key, {
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guifg': eval('g.'..value),
+"         \ }))
+"   call extend(rules, pgmnt#hi#group(
+"         \ 'DiagnosticSign'..key, {
+"         \   'ctermbg': c.linenr_bg,
+"         \   'ctermfg': eval('c.'..value),
+"         \   'guibg': g.linenr_bg,
+"         \   'guifg': eval('g.'..value),
+
+  " [Neovim built-in diagnostics](https://neovim.io/doc/user/diagnostic.html) {{{
+  for [group, color] in items({
+        \   'Error': 'red',
+        \   'Hint': 'comment_fg',
+        \   'Info': 'lblue',
+        \   'Warn': 'orange',
+        \ })
     call extend(rules, pgmnt#hi#group(
-          \ 'LspDiagnosticsUnderline'..key, {
+          \ 'DiagnosticUnderline' . group, {
           \   'cterm': 'underline',
+          \   'ctermfg': c[color],
           \   'gui': 'underline',
+          \   'guisp': g[color],
           \   'term': 'underline',
-          \   'ctermfg': eval('c.'..value),
-          \   'guisp': eval('g.'..value),
           \ }))
     call extend(rules, pgmnt#hi#group(
-          \ 'LspDiagnosticsDefault'..key, {
-          \   'ctermfg': eval('c.'..value),
-          \   'guifg': eval('g.'..value),
+          \ 'Diagnostic' . group, {
+          \   'ctermfg': c[color],
+          \   'guifg': g[color],
           \ }))
     call extend(rules, pgmnt#hi#group(
-          \ 'LspDiagnosticsSign'..key, {
+          \ 'DiagnosticSign' . group, {
           \   'ctermbg': c.linenr_bg,
-          \   'ctermfg': eval('c.'..value),
+          \   'ctermfg': c[color],
           \   'guibg': g.linenr_bg,
-          \   'guifg': eval('g.'..value),
-          \ }))
-  endfor
-
-  " Try to fix floating border colors.
-  call extend(rules, pgmnt#hi#group(
-        \ 'FloatBorder', {
-        \   'ctermbg': c.pmenu_bg,
-        \   'ctermfg': c.pmenu_fg,
-        \   'guibg': g.pmenu_bg,
-        \   'guifg': g.pmenu_fg,
-        \ }))
-
-  " Info color is hard to read within floating window, so use normal text
-  " color instead.
-  call extend(rules, pgmnt#hi#group(
-        \ 'NormalFloat', {
-        \   'ctermbg': c.pmenu_bg,
-        \   'ctermfg': c.pmenu_fg,
-        \   'guibg': g.pmenu_bg,
-        \   'guifg': g.pmenu_fg,
-        \ }))
-
-  " Info color is hard to read within floating window, so use normal text
-  " color instead.
-  call extend(rules, pgmnt#hi#group(
-        \ 'LspDiagnosticsFloatingHint', {
-        \   'ctermbg': c.pmenu_bg,
-        \   'ctermfg': c.pmenu_fg,
-        \   'guibg': g.pmenu_bg,
-        \   'guifg': g.pmenu_fg,
-        \ }))
-  " }}}
-
-  " [Neovim built-in diagnostics](https://neovim.io/doc/user/diagnostic.html)
-  for [key, value] in items({'Error': 'red', 'Warn': 'orange', 'Info': 'blue', 'Hint': 'linenr_fg'})
-    call extend(rules, pgmnt#hi#group(
-          \ 'DiagnosticUnderline'..key, {
-          \   'cterm': 'underline',
-          \   'gui': 'underline',
-          \   'term': 'underline',
-          \   'ctermfg': eval('c.'..value),
-          \   'guisp': eval('g.'..value),
-          \ }))
-    call extend(rules, pgmnt#hi#group(
-          \ 'Diagnostic'..key, {
-          \   'ctermfg': eval('c.'..value),
-          \   'guifg': eval('g.'..value),
-          \ }))
-    call extend(rules, pgmnt#hi#group(
-          \ 'DiagnosticSign'..key, {
-          \   'ctermbg': c.linenr_bg,
-          \   'ctermfg': eval('c.'..value),
-          \   'guibg': g.linenr_bg,
-          \   'guifg': eval('g.'..value),
+          \   'guifg': g[color],
           \ }))
   endfor
   " Info color is hard to read within floating window, so use normal text
@@ -693,7 +748,7 @@ function! s:create_links() abort
   " css
   call add(links, pgmnt#hi#link('cssBraces', 'Delimiter'))
   call add(links, pgmnt#hi#link('cssClassName', 'Special'))
-  call add(links, pgmnt#hi#link('cssClassNameDot', 'Normal'))
+  call add(links, pgmnt#hi#link('cssClassNameDot', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('cssPseudoClassId', 'Special'))
   call add(links, pgmnt#hi#link('cssTagName', 'Statement'))
 
@@ -706,7 +761,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('htmlTag', 'Statement'))
 
   " json
-  call add(links, pgmnt#hi#link('jsonQuote', 'Normal'))
+  call add(links, pgmnt#hi#link('jsonQuote', 'icebergNormalFg'))
 
   " php
   call add(links, pgmnt#hi#link('phpVarSelector', 'Identifier'))
@@ -722,7 +777,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('rubyStringDelimiter', 'String'))
 
   " rust
-  " call add(links, pgmnt#hi#link('rustFuncCall', 'Normal'))
+  call add(links, pgmnt#hi#link('rustFuncCall', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('rustFuncName', 'Title'))
   call add(links, pgmnt#hi#link('rustType', 'Constant'))
 
@@ -730,19 +785,19 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('sassClass', 'Special'))
 
   " sh
-  call add(links, pgmnt#hi#link('shFunction', 'Normal'))
+  call add(links, pgmnt#hi#link('shFunction', 'icebergNormalFg'))
 
   " vim
   call add(links, pgmnt#hi#link('vimContinue', 'Comment'))
   call add(links, pgmnt#hi#link('vimFuncSID', 'vimFunction'))
-  call add(links, pgmnt#hi#link('vimFuncVar', 'Normal'))
+  call add(links, pgmnt#hi#link('vimFuncVar', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('vimFunction', 'Title'))
   call add(links, pgmnt#hi#link('vimGroup', 'Statement'))
   call add(links, pgmnt#hi#link('vimHiGroup', 'Statement'))
   call add(links, pgmnt#hi#link('vimHiTerm', 'Identifier'))
   call add(links, pgmnt#hi#link('vimMapModKey', 'Special'))
   call add(links, pgmnt#hi#link('vimOption', 'Identifier'))
-  call add(links, pgmnt#hi#link('vimVar', 'Normal'))
+  call add(links, pgmnt#hi#link('vimVar', 'icebergNormalFg'))
 
   " xml
   call add(links, pgmnt#hi#link('xmlAttrib', 'Constant'))
@@ -763,7 +818,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('CtrlPMode2', 'StatusLine'))
 
   " [Denite](https://github.com/Shougo/denite.nvim)
-  call add(links, pgmnt#hi#link('deniteMatched', 'Normal'))
+  call add(links, pgmnt#hi#link('deniteMatched', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('deniteMatchedChar', 'Title'))
 
   " [vim-elixir](https://github.com/elixir-editors/vim-elixir)
@@ -775,19 +830,19 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('elixirExceptionDefine', 'Statement'))
   call add(links, pgmnt#hi#link('elixirFunctionDeclaration', 'Title'))
   call add(links, pgmnt#hi#link('elixirKeyword', 'Statement'))
-  call add(links, pgmnt#hi#link('elixirModuleDeclaration', 'Normal'))
+  call add(links, pgmnt#hi#link('elixirModuleDeclaration', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('elixirModuleDefine', 'Statement'))
   call add(links, pgmnt#hi#link('elixirPrivateDefine', 'Statement'))
   call add(links, pgmnt#hi#link('elixirStringDelimiter', 'String'))
 
   " [vim-flow](https://github.com/flowtype/vim-flow)
-  call add(links, pgmnt#hi#link('jsFlowMaybe', 'Normal'))
-  call add(links, pgmnt#hi#link('jsFlowObject', 'Normal'))
+  call add(links, pgmnt#hi#link('jsFlowMaybe', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('jsFlowObject', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('jsFlowType', 'PreProc'))
 
   " [vim-graphql](https://github.com/jparise/vim-graphql)
-  call add(links, pgmnt#hi#link('graphqlName', 'Normal'))
-  call add(links, pgmnt#hi#link('graphqlOperator', 'Normal'))
+  call add(links, pgmnt#hi#link('graphqlName', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('graphqlOperator', 'icebergNormalFg'))
 
   " [git-messenger.vim](https://github.com/rhysd/git-messenger.vim)
   call add(links, pgmnt#hi#link('gitmessengerHash', 'Comment'))
@@ -796,12 +851,12 @@ function! s:create_links() abort
 
   " [vim-javascript](https://github.com/pangloss/vim-javascript)
   call add(links, pgmnt#hi#link('jsArrowFunction', 'Operator'))
-  call add(links, pgmnt#hi#link('jsClassDefinition', 'Normal'))
+  call add(links, pgmnt#hi#link('jsClassDefinition', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('jsClassFuncName', 'Title'))
   call add(links, pgmnt#hi#link('jsExport', 'Statement'))
   call add(links, pgmnt#hi#link('jsFuncName', 'Title'))
   call add(links, pgmnt#hi#link('jsFutureKeys', 'Statement'))
-  call add(links, pgmnt#hi#link('jsFuncCall', 'Normal'))
+  call add(links, pgmnt#hi#link('jsFuncCall', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('jsGlobalObjects', 'Statement'))
   call add(links, pgmnt#hi#link('jsModuleKeywords', 'Statement'))
   call add(links, pgmnt#hi#link('jsModuleOperators', 'Statement'))
@@ -823,7 +878,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('ngxDirective', 'Statement'))
 
   " [vim-plug](https://github.com/junegunn/vim-plug)
-  call add(links, pgmnt#hi#link('plug1', 'Normal'))
+  call add(links, pgmnt#hi#link('plug1', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('plug2', 'Identifier'))
   call add(links, pgmnt#hi#link('plugDash', 'Comment'))
   call add(links, pgmnt#hi#link('plugMessage', 'Special'))
@@ -844,25 +899,66 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('StartifyPath', 'Comment'))
   call add(links, pgmnt#hi#link('StartifySection', 'Statement'))
   call add(links, pgmnt#hi#link('StartifySlash', 'Comment'))
-  call add(links, pgmnt#hi#link('StartifySpecial', 'Normal'))
+  call add(links, pgmnt#hi#link('StartifySpecial', 'icebergNormalFg'))
 
   " [SVSS](https://github.com/cocopon/svss.vim)
   call add(links, pgmnt#hi#link('svssBraces', 'Delimiter'))
 
   " [vim-swift](https://github.com/toyamarinyon/vim-swift)
-  call add(links, pgmnt#hi#link('swiftIdentifier', 'Normal'))
+  call add(links, pgmnt#hi#link('swiftIdentifier', 'icebergNormalFg'))
+
+  " [Tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter)
+  call add(links, pgmnt#hi#link('TSAttribute', 'Special'))
+  call add(links, pgmnt#hi#link('TSBoolean', 'Constant'))
+  call add(links, pgmnt#hi#link('TSCharacter', 'Constant'))
+  call add(links, pgmnt#hi#link('TSComment', 'Comment'))
+  call add(links, pgmnt#hi#link('TSConstructor', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSConditional', 'Statement'))
+  call add(links, pgmnt#hi#link('TSConstant', 'Constant'))
+  call add(links, pgmnt#hi#link('TSConstBuiltin', 'Constant'))
+  call add(links, pgmnt#hi#link('TSConstMacro', 'Constant'))
+  call add(links, pgmnt#hi#link('TSError', 'Error'))
+  call add(links, pgmnt#hi#link('TSException', 'Statement'))
+  call add(links, pgmnt#hi#link('TSField', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSFloat', 'Constant'))
+  call add(links, pgmnt#hi#link('TSInclude', 'Statement'))
+  call add(links, pgmnt#hi#link('TSKeyword', 'Statement'))
+  call add(links, pgmnt#hi#link('TSKeywordFunction', 'Function'))
+  call add(links, pgmnt#hi#link('TSLabel', 'Special'))
+  call add(links, pgmnt#hi#link('TSNamespace', 'Statement'))
+  call add(links, pgmnt#hi#link('TSNumber', 'Constant'))
+  call add(links, pgmnt#hi#link('TSOperator', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSParameter', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSParameterReference', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSProperty', 'TSField'))
+  call add(links, pgmnt#hi#link('TSPunctDelimiter', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSPunctBracket', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSPunctSpecial', 'Special'))
+  call add(links, pgmnt#hi#link('TSRepeat', 'Statement'))
+  call add(links, pgmnt#hi#link('TSString', 'String'))
+  call add(links, pgmnt#hi#link('TSStringRegex', 'String'))
+  call add(links, pgmnt#hi#link('TSStringEscape', 'Special'))
+  call add(links, pgmnt#hi#link('TSTag', 'htmlTagName'))
+  call add(links, pgmnt#hi#link('TSTagAttribute', 'htmlArg'))
+  call add(links, pgmnt#hi#link('TSTagDelimiter', 'htmlTagName'))
+  call add(links, pgmnt#hi#link('TSText', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSTitle', 'Title'))
+  call add(links, pgmnt#hi#link('TSType', 'Type'))
+  call add(links, pgmnt#hi#link('TSTypeBuiltin', 'Type'))
+  call add(links, pgmnt#hi#link('TSVariable', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('TSVariableBuiltin', 'Statement'))
 
   " [typescript-vim](https://github.com/leafgarland/typescript-vim)
-  call add(links, pgmnt#hi#link('typescriptAjaxMethods', 'Noise'))
-  call add(links, pgmnt#hi#link('typescriptBraces', 'jsFuncBraces'))
-  call add(links, pgmnt#hi#link('typescriptEndColons', 'Noise'))
+  call add(links, pgmnt#hi#link('typescriptAjaxMethods', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('typescriptBraces', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('typescriptEndColons', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('typescriptFuncKeyword', 'Statement'))
   call add(links, pgmnt#hi#link('typescriptGlobalObjects', 'Statement'))
-  call add(links, pgmnt#hi#link('typescriptHtmlElemProperties', 'Noise'))
+  call add(links, pgmnt#hi#link('typescriptHtmlElemProperties', 'icebergNormalFg'))
   call add(links, pgmnt#hi#link('typescriptIdentifier', 'Statement'))
-  call add(links, pgmnt#hi#link('typescriptMessage', 'Noise'))
-  call add(links, pgmnt#hi#link('typescriptNull', 'jsNull'))
-  call add(links, pgmnt#hi#link('typescriptParens', 'jsParens'))
+  call add(links, pgmnt#hi#link('typescriptMessage', 'icebergNormalFg'))
+  call add(links, pgmnt#hi#link('typescriptNull', 'Constant'))
+  call add(links, pgmnt#hi#link('typescriptParens', 'icebergNormalFg'))
   " }}}
 
   return links
