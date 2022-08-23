@@ -868,6 +868,7 @@ function! s:create_links() abort
   call add(links, pgmnt#hi#link('jsUndefined', 'Constant'))
 
   " [vim-markdown](https://github.com/tpope/vim-markdown)
+  call add(links, pgmnt#hi#link('markdownError', 'NONE'))
   call add(links, pgmnt#hi#link('markdownBold', 'Special'))
   call add(links, pgmnt#hi#link('markdownCode', 'String'))
   call add(links, pgmnt#hi#link('markdownCodeDelimiter', 'String'))

@@ -5,7 +5,7 @@
 "
 " File:       iceberg.vim
 " Maintainer: cocopon <cocopon@me.com>
-" Modified:   2022-06-01 22:19-0400
+" Modified:   2022-08-11 20:36-0400
 " License:    MIT
 
 
@@ -375,6 +375,7 @@ hi! link jsObjectKey Identifier
 hi! link jsSuper Statement
 hi! link jsTemplateBraces Special
 hi! link jsUndefined Constant
+hi! link markdownError NONE
 hi! link markdownBold Special
 hi! link markdownCode String
 hi! link markdownCodeDelimiter String
