@@ -23,7 +23,7 @@ function! iceberg#palette#dark#create() abort
 
   " normal
   let g.normal_bg = pgmnt#color#hsl(hue_base, 0.20, 0.11)
-  let g.normal_fg = pgmnt#color#hsl(hue_base, 0.10, 0.80)
+  let g.normal_fg = pgmnt#color#hsl(hue_base, 0.00, 0.80)
 
   " tint
   let g.blue_tint_bg   = pgmnt#color#mix(g.blue, g.normal_bg, 0.30)
@@ -155,7 +155,7 @@ function! iceberg#palette#dark#create() abort
 
   " normal
   let c.normal_bg = 234
-  let c.normal_fg = 252
+  let c.normal_fg = 7
 
   " tint
   let c.blue_tint_bg   = 24
